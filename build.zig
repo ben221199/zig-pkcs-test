@@ -10,12 +10,11 @@ pub fn build(b: *std.Build) void{
         .optimize = optimize,
     });
 
-    const libfizzbuzz = b.addLibrary(.{
+    const mod_pkcs11 = b.addLibrary(.{
         .name = "mod_pkcs11",
         .linkage = .dynamic,
-        .version = .{ .major = 1, .minor = 2, .patch = 3 },
         .root_module = mod,
     });
 
-    b.installArtifact(libfizzbuzz);
+    b.installArtifact(mod_pkcs11);
 }
