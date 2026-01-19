@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add --no-cache opensc strace zig
+RUN apk add --no-cache opensc openssl strace zig
 
 RUN mkdir -p /tmp/mod_pkcs11
 
