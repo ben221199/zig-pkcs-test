@@ -12,4 +12,6 @@ RUN zig build
 
 RUN ls -l /tmp/mod_pkcs11/zig-out/lib
 
-RUN pkcs11-tool --module /tmp/mod_pkcs11/zig-out/lib/libmod_pkcs11.so -L
+RUN export OPENSC_DEBUG=1
+
+RUN pkcs11-tool --verbose --module /tmp/mod_pkcs11/zig-out/lib/libmod_pkcs11.so -L
