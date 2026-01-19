@@ -10,4 +10,4 @@ COPY . .
 
 RUN zig build
 
-RUN df /tmp/mod_pkcs11/zig-out
+RUN du /tmp/mod_pkcs11/zig-out
