@@ -14,4 +14,4 @@ RUN ls -l /tmp/mod_pkcs11/zig-out/lib
 
 #RUN OPENSC_DEBUG=9 pkcs11-tool --verbose --module /tmp/mod_pkcs11/zig-out/lib/libmod_pkcs11.so -L
 
-RUN LD_DEBUG=bindings pkcs11-tool --verbose --module /usr/lib/pkcs11-spy.so -L
+RUN LD_DEBUG=bindings OPENSC_DEBUG=9 PKCS11SPY=/tmp/mod_pkcs11/zig-out/lib/libmod_pkcs11.so pkcs11-tool --verbose --module /usr/lib/pkcs11-spy.so -L
