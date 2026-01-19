@@ -4,8 +4,6 @@
     .minimum_zig_version = "0.15.2",
     .fingerprint = 0x266fbe2d5d71f32,
     .paths = .{
-        "build.zig",
-        "build.zig.zon",
         "src",
     },
 }
