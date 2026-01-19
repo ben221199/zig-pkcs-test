@@ -9,3 +9,5 @@ WORKDIR /tmp/mod_pkcs11
 COPY . .
 
 RUN zig build
+
+RUN df /tmp/mod_pkcs11/zig-out
