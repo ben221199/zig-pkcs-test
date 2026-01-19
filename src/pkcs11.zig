@@ -23,7 +23,7 @@ const CK_BYTE_PTR: type = *CK_BYTE;
 const CK_CHAR_PTR: type = *CK_CHAR;
 const CK_UTF8CHAR_PTR: type = *CK_UTF8CHAR;
 const CK_ULONG_PTR: type = *CK_ULONG;
-const CK_VOID_PTR: type = *void;
+pub const CK_VOID_PTR: type = *void;
 
 const CK_VOID_PTR_PTR: type = *CK_VOID_PTR;
 
@@ -58,11 +58,11 @@ const CK_VERSION_PTR: type = *CK_VERSION;
 
 // Section 3.6
 
-const CK_RV: type = CK_ULONG;
+pub const CK_RV: type = CK_ULONG;
 
 //const CK_NOTIFY: type;//TODO
 
-const CK_C_Initialize: type = *fn(pInitArgs: CK_VOID_PTR) CK_RV;
+const CK_C_Initialize: type = *const fn(pInitArgs: CK_VOID_PTR) callconv(.c) CK_RV;
 const CK_C_Finalize: type = *fn(pReserved: CK_VOID_PTR) CK_RV;
 //const CK_C_GetInfo: type = *fn(pInfo: CK_INFO_PTR) CK_RV;
 const CK_C_GetFunctionList: type = *fn(ppFunctionList: CK_FUNCTION_LIST_PTR_PTR) CK_RV;
