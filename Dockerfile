@@ -2,7 +2,6 @@ FROM alpine
 
 RUN apk add --no-cache zig
 
-COPY pkcs11.zig .
-COPY pkcs11_module.zig .
+COPY . .
 
-RUN zig build-lib -dynamic pkcs11_module.zig --name pkcs11_mod
+RUN zig build-lib -dynamic src/root.zig --name pkcs11_mod.so

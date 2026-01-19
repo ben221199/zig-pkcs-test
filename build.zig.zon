@@ -1,0 +1,7 @@
+.{
+    .name = .zig_pkcs_test,
+    .version = "0.0.0",
+    .minimum_zig_version = "0.15.2",
+    .fingerprint = 0x266fbe2d5d71f32,
+    .paths = .{""},
+}

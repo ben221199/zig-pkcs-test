@@ -60,19 +60,19 @@ const CK_VERSION_PTR: type = *CK_VERSION;
 
 const CK_RV: type = CK_ULONG;
 
-const CK_NOTIFY: type;//TODO
+//const CK_NOTIFY: type;//TODO
 
 const CK_C_Initialize: type = *fn(pInitArgs: CK_VOID_PTR) CK_RV;
 const CK_C_Finalize: type = *fn(pReserved: CK_VOID_PTR) CK_RV;
-const CK_C_GetInfo: type = *fn(pInfo: CK_INFO_PTR) CK_RV;
+//const CK_C_GetInfo: type = *fn(pInfo: CK_INFO_PTR) CK_RV;
 const CK_C_GetFunctionList: type = *fn(ppFunctionList: CK_FUNCTION_LIST_PTR_PTR) CK_RV;
-const CK_C_GetSlotList: type = *fn(tokenPresent: CK_BBOOL,pSlotList: CK_SLOT_ID_PTR,pulCount: CK_ULONG_PTR) CK_RV;
+//const CK_C_GetSlotList: type = *fn(tokenPresent: CK_BBOOL,pSlotList: CK_SLOT_ID_PTR,pulCount: CK_ULONG_PTR) CK_RV;
 
 const CK_FUNCTION_LIST: type = struct {
     version: CK_VERSION,
     C_Initialize: CK_C_Initialize,
     C_Finalize: CK_C_Finalize,
-    C_GetInfo: CK_C_GetInfo,
+    //C_GetInfo: CK_C_GetInfo,
 };
 
 const CK_FUNCTION_LIST_PTR: type = *CK_FUNCTION_LIST;
