@@ -15,22 +15,10 @@ export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) pkcs11.CK_RV {
     return 0;
 }
 
-export fn todoFunc() pkcs11.CK_RV {//notSupported
-    std.debug.print("[CALLED]\n",.{});
-    return 0x54;
-}
-
-const version: pkcs11.CK_VERSION = pkcs11.CK_VERSION{
-    .major = 0x02,
-    .minor = 0x28,
+var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
+    .C_Initialize = &C_Initialize,
 };
 
-var functionList: pkcs11.CK_FUNCTION_LIST = undefined;
-
-
-
-//pkcs11.CK_FUNCTION_LIST_PTR_PTR
-////ppFunctionList: *pkcs11.CK_FUNCTION_LIST
 export fn C_GetFunctionList(ppFunctionList: *?*pkcs11.CK_FUNCTION_LIST) pkcs11.CK_RV {
     std.debug.print("[CALLED]: C_GetFunctionList(ppFunctionList={})\n",.{ppFunctionList});
     std.debug.print(" - ppFunctionList = {} \n",.{@intFromPtr(ppFunctionList)});
@@ -41,19 +29,30 @@ export fn C_GetFunctionList(ppFunctionList: *?*pkcs11.CK_FUNCTION_LIST) pkcs11.C
     //    return 123;
     //}
 
-    // ppFunctionList.* = null;
-
-    //functionList.version = C_Initialize;
-    functionList.C_Initialize = &C_Initialize;
+    //functionList.C_Initialize = &C_Initialize;
 
     ppFunctionList.* = &functionList;
 
-    // std.debug.print(" - ppFunctionList = {} \n",.{@intFromPtr(ppFunctionList)});
-    // std.debug.print(" - *ppFunctionList = {} \n",.{@intFromPtr(ppFunctionList.*)});
-    // std.debug.print(" - C_Initialize = {} \n",.{ppFunctionList.*.?.C_Initialize});
-
     return 0;
 }
+
+export fn todoFunc() pkcs11.CK_RV {//notSupported
+    std.debug.print("[CALLED]\n",.{});
+    return 0x54;
+}
+
+const version: pkcs11.CK_VERSION = pkcs11.CK_VERSION{
+    .major = 0x02,
+    .minor = 0x28,
+};
+
+
+
+
+
+//pkcs11.CK_FUNCTION_LIST_PTR_PTR
+////ppFunctionList: *pkcs11.CK_FUNCTION_LIST
+
 
 
 //
