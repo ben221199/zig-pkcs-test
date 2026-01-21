@@ -8,7 +8,9 @@ const version: pkcs11.CK_VERSION = pkcs11.CK_VERSION{
 
 var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
     .version = version,
-    .C_Initialize = &C_Initialize,
+    .C_Initialize = C_Initialize,
+    .C_Finalize = C_Finalize,
+    .C_GetInfo = C_GetInfo,
 };
 
 export fn C_Initialize(_: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV  {
@@ -21,7 +23,11 @@ export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV {
     std.debug.print("[CALLED]: C_Finalize()\n",.{});
     std.debug.print("[CALLED]: C_Finalize({})\n",.{pReserved});
     //TODO
-    pReserved.*;
+    return 0;
+}
+
+export fn C_GetInfo(_: *void) callconv(.c) pkcs11.CK_RV{
+    std.debug.print("[CALLED]: C_GetInfo()\n",.{});
     return 0;
 }
 

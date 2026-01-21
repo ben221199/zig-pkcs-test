@@ -134,9 +134,9 @@ const CK_C_WaitForSlotEvent: type = *const fn() CK_RV; //TODO
 
 pub const CK_FUNCTION_LIST: type = extern struct {
     version: CK_VERSION,
-    C_Initialize: *const fn (*void) callconv(.c) c_ulong, //*const fn (*void) c_ulong,//CK_C_Initialize, *const fn (*void) c_ulong *const fn(*void) c_ulong
-    //C_Finalize: u64,//CK_C_Finalize,
-    //C_GetInfo: u64,//CK_C_GetInfo, *const fn (*void) c_ulong
+    C_Initialize: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_Initialize
+    C_Finalize: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_Finalize
+    C_GetInfo: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_GetInfo
     //C_GetFunctionList: u64,//CK_C_GetFunctionList,
     // C_GetSlotList: CK_C_GetSlotList,
     // C_GetSlotInfo: CK_C_GetSlotInfo,
