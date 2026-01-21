@@ -13,6 +13,17 @@ var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
     .C_GetInfo = C_GetInfo,
 };
 
+var info: pkcs11.CK_INFO = pkcs11.CK_INFO{
+    .cryptokiVersion = version,
+    .manufacturerID = "Yocto",
+    .flags = 0,
+    .libraryDescription = "KMIP HSM Test module",
+    .libraryVersion = pkcs11.CK_VERSION{
+        .major = 0,
+        .minor = 1,
+    },
+};
+
 export fn C_Initialize(_: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV  {
     std.debug.print("[CALLED]: C_Initialize()\n",.{});
     //std.debug.print("[CALLED]: C_Initialize({})\n",.{pInitArgs});
@@ -26,8 +37,11 @@ export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV {
     return 0;
 }
 
-export fn C_GetInfo(_: *void) callconv(.c) pkcs11.CK_RV{
+export fn C_GetInfo(pInfo: *pkcs11.CK_INFO_PTR) callconv(.c) pkcs11.CK_RV{
     std.debug.print("[CALLED]: C_GetInfo()\n",.{});
+
+    pInfo.* = &info;
+
     return 0;
 }
 

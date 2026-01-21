@@ -52,8 +52,16 @@ pub const CK_VERSION: type = extern struct {
 
 const CK_VERSION_PTR: type = *CK_VERSION;
 
-//CK_INFO
-//CK_INFO_PTR
+pub const CK_INFO: type = extern struct {
+    cryptokiVersion: CK_VERSION,
+    manufacturerID: CK_UTF8CHAR[32],
+    flags: CK_FLAGS,
+    libraryDescription: CK_UTF8CHAR[32],
+    libraryVersion: CK_VERSION,
+};
+
+const CK_INFO_PTR: type = *CK_INFO;
+
 //CK_NOTIFICATION
 
 // Section 3.6
