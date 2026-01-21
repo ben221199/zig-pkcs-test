@@ -9,7 +9,7 @@ const CK_CHAR: type = CK_BYTE;
 const CK_UTF8CHAR: type = CK_BYTE;
 
 /// @
-const CK_BBOOL: type = CK_BYTE;
+pub const CK_BBOOL: type = CK_BYTE;
 
 const CK_ULONG: type = c_ulong;
 
@@ -22,7 +22,7 @@ const CK_FLAGS: type = CK_ULONG;
 const CK_BYTE_PTR: type = *CK_BYTE;
 const CK_CHAR_PTR: type = *CK_CHAR;
 const CK_UTF8CHAR_PTR: type = *CK_UTF8CHAR;
-const CK_ULONG_PTR: type = *CK_ULONG;
+pub const CK_ULONG_PTR: type = *CK_ULONG;
 pub const CK_VOID_PTR: type = *void;
 
 const CK_VOID_PTR_PTR: type = *CK_VOID_PTR;
@@ -142,11 +142,11 @@ const CK_C_WaitForSlotEvent: type = *const fn() CK_RV; //TODO
 
 pub const CK_FUNCTION_LIST: type = extern struct {
     version: CK_VERSION,
-    C_Initialize: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_Initialize
-    C_Finalize: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_Finalize
-    C_GetInfo: *const fn (CK_INFO_PTR) callconv(.c) c_ulong, //TODO CK_C_GetInfo
-    //C_GetFunctionList: u64,//CK_C_GetFunctionList,
-    // C_GetSlotList: CK_C_GetSlotList,
+    C_Initialize: *const fn (*void) callconv(.c) CK_RV, //TODO CK_C_Initialize
+    C_Finalize: *const fn (*void) callconv(.c) CK_RV, //TODO CK_C_Finalize
+    C_GetInfo: *const fn (CK_INFO_PTR) callconv(.c) CK_RV, //TODO CK_C_GetInfo
+    C_GetFunctionList: *const fn (CK_FUNCTION_LIST_PTR_PTR) callconv(.c) CK_RV, //TODO CK_C_GetFunctionList
+    C_GetSlotList: *const fn (CK_BBOOL,*void,CK_ULONG_PTR) callconv(.c) CK_RV, //TODO CK_C_GetSlotList
     // C_GetSlotInfo: CK_C_GetSlotInfo,
     // C_GetTokenInfo: CK_C_GetTokenInfo,
     // C_GetMechanismList: CK_C_GetMechanismList,

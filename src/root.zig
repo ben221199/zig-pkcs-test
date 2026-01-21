@@ -11,6 +11,8 @@ var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
     .C_Initialize = C_Initialize,
     .C_Finalize = C_Finalize,
     .C_GetInfo = C_GetInfo,
+    .C_GetFunctionList = C_GetFunctionList,
+    .C_GetSlotList = C_GetSlotList,
 };
 
 var info: pkcs11.CK_INFO = pkcs11.CK_INFO{
@@ -56,6 +58,11 @@ export fn C_GetFunctionList(ppFunctionList: pkcs11.CK_FUNCTION_LIST_PTR_PTR) cal
 
     ppFunctionList.* = &functionList;
 
+    return 0;
+}
+
+export fn C_GetSlotList(tokenPresent: pkcs11.CK_BBOOL,pSlotList: *void,pulCount: pkcs11.CK_ULONG_PTR) pkcs11.CK_RV {
+    std.debug.print("[CALLED]: C_GetSlotList(ppFunctionList={},pSlotList={},pulCount={})\n",.{tokenPresent,pSlotList,pulCount});
     return 0;
 }
 
