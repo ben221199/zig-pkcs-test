@@ -2,11 +2,9 @@ const pkcs11: type = @import("pkcs11.zig");
 const std: type = @import("std");
 
 export fn C_Initialize(_: pkcs11.CK_VOID_PTR) pkcs11.CK_RV {
-    return 123;
-    // std.debug.print("[CALLED]: C_Initialize()\n",.{});
-    // std.debug.print("[CALLED]: C_Initialize({})\n",.{pInitArgs});
-    // //pInitArgs.*;
-    // return 0;
+    std.debug.print("[CALLED]: C_Initialize()\n",.{});
+    //std.debug.print("[CALLED]: C_Initialize({})\n",.{pInitArgs});
+    return 0;
 }
 
 export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) pkcs11.CK_RV {
