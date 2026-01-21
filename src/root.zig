@@ -15,24 +15,20 @@ var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
     .C_GetSlotList = C_GetSlotList,
 };
 
-var info: pkcs11.CK_INFO = pkcs11.CK_INFO{
-
-};
-
 export fn C_Initialize(pInitArgs: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV  {
-    std.debug.print("[CALLED]: C_Initialize({})\n",.{pInitArgs});
+    std.debug.print("[CALLED]: C_Initialize(pInitArgs={})\n",.{pInitArgs});
     //TODO
     return 0;
 }
 
 export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV {
-    std.debug.print("[CALLED]: C_Finalize({})\n",.{pReserved});
+    std.debug.print("[CALLED]: C_Finalize(pReserved={})\n",.{pReserved});
     //TODO
     return 0;
 }
 
 export fn C_GetInfo(pInfo: pkcs11.CK_INFO_PTR) callconv(.c) pkcs11.CK_RV{
-    std.debug.print("[CALLED]: C_GetInfo({})\n",.{pInfo});
+    std.debug.print("[CALLED]: C_GetInfo(pInfo={})\n",.{pInfo});
 
     pInfo.cryptokiVersion = version;
     std.mem.copyForwards(u8,&pInfo.manufacturerID,"Yocto");
