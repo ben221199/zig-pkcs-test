@@ -16,6 +16,7 @@ export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) pkcs11.CK_RV {
 }
 
 var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
+    .version = version,
     .C_Initialize = &C_Initialize,
 };
 
