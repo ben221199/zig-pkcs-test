@@ -46,7 +46,7 @@ export fn C_GetFunctionList(ppFunctionList: *?*pkcs11.CK_FUNCTION_LIST) pkcs11.C
     // ppFunctionList.* = null;
 
     //functionList.version = C_Initialize;
-    functionList.C_Initialize = C_Initialize;
+    functionList.C_Initialize = &C_Initialize;
 
     ppFunctionList.* = &functionList;
 
