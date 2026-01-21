@@ -62,7 +62,11 @@ pub const CK_INFO: type = extern struct {
 
 pub const CK_INFO_PTR: type = *CK_INFO;
 
-//CK_NOTIFICATION
+pub const CK_NOTIFICATION: type = CK_ULONG;
+
+pub const CK_SLOT_ID: type = CK_ULONG;
+
+pub const CK_SLOT_ID_PTR: type = *CK_SLOT_ID;
 
 // Section 3.6
 
@@ -142,11 +146,11 @@ const CK_C_WaitForSlotEvent: type = *const fn() CK_RV; //TODO
 
 pub const CK_FUNCTION_LIST: type = extern struct {
     version: CK_VERSION,
-    C_Initialize: *const fn (*void) callconv(.c) CK_RV, //TODO CK_C_Initialize
-    C_Finalize: *const fn (*void) callconv(.c) CK_RV, //TODO CK_C_Finalize
+    C_Initialize: *const fn (CK_VOID_PTR) callconv(.c) CK_RV, //TODO CK_C_Initialize
+    C_Finalize: *const fn (CK_VOID_PTR) callconv(.c) CK_RV, //TODO CK_C_Finalize
     C_GetInfo: *const fn (CK_INFO_PTR) callconv(.c) CK_RV, //TODO CK_C_GetInfo
     C_GetFunctionList: *const fn (CK_FUNCTION_LIST_PTR_PTR) callconv(.c) CK_RV, //TODO CK_C_GetFunctionList
-    C_GetSlotList: *const fn (CK_BBOOL,*void,CK_ULONG_PTR) callconv(.c) CK_RV, //TODO CK_C_GetSlotList
+    C_GetSlotList: *const fn (CK_BBOOL,CK_SLOT_ID_PTR,CK_ULONG_PTR) callconv(.c) CK_RV, //TODO CK_C_GetSlotList
     // C_GetSlotInfo: CK_C_GetSlotInfo,
     // C_GetTokenInfo: CK_C_GetTokenInfo,
     // C_GetMechanismList: CK_C_GetMechanismList,

@@ -19,21 +19,20 @@ var info: pkcs11.CK_INFO = pkcs11.CK_INFO{
 
 };
 
-export fn C_Initialize(_: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV  {
-    std.debug.print("[CALLED]: C_Initialize()\n",.{});
-    //std.debug.print("[CALLED]: C_Initialize({})\n",.{pInitArgs});
+export fn C_Initialize(pInitArgs: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV  {
+    std.debug.print("[CALLED]: C_Initialize({})\n",.{pInitArgs});
+    //TODO
     return 0;
 }
 
 export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV {
-    std.debug.print("[CALLED]: C_Finalize()\n",.{});
     std.debug.print("[CALLED]: C_Finalize({})\n",.{pReserved});
     //TODO
     return 0;
 }
 
 export fn C_GetInfo(pInfo: pkcs11.CK_INFO_PTR) callconv(.c) pkcs11.CK_RV{
-    std.debug.print("[CALLED]: C_GetInfo()\n",.{});
+    std.debug.print("[CALLED]: C_GetInfo({})\n",.{pInfo});
 
     pInfo.cryptokiVersion = version;
     std.mem.copyForwards(u8,&pInfo.manufacturerID,"Yocto");
@@ -49,8 +48,6 @@ export fn C_GetInfo(pInfo: pkcs11.CK_INFO_PTR) callconv(.c) pkcs11.CK_RV{
 
 export fn C_GetFunctionList(ppFunctionList: pkcs11.CK_FUNCTION_LIST_PTR_PTR) callconv(.c) pkcs11.CK_RV {
     std.debug.print("[CALLED]: C_GetFunctionList(ppFunctionList={})\n",.{ppFunctionList});
-    std.debug.print(" - ppFunctionList = {} \n",.{@intFromPtr(ppFunctionList)});
-    std.debug.print(" - *ppFunctionList = {} \n",.{@intFromPtr(ppFunctionList.*)});
 
     if(@intFromPtr(ppFunctionList)==0){
         return 123; // TODO Better error
@@ -61,97 +58,11 @@ export fn C_GetFunctionList(ppFunctionList: pkcs11.CK_FUNCTION_LIST_PTR_PTR) cal
     return 0;
 }
 
-export fn C_GetSlotList(tokenPresent: pkcs11.CK_BBOOL,pSlotList: *void,pulCount: pkcs11.CK_ULONG_PTR) pkcs11.CK_RV {
+// TODO C_GetInterfaceList
+
+// TODO C_GetInterface
+
+export fn C_GetSlotList(tokenPresent: pkcs11.CK_BBOOL,pSlotList: pkcs11.CK_SLOT_ID_PTR,pulCount: pkcs11.CK_ULONG_PTR) pkcs11.CK_RV {
     std.debug.print("[CALLED]: C_GetSlotList(ppFunctionList={},pSlotList={},pulCount={})\n",.{tokenPresent,pSlotList,pulCount});
     return 0;
 }
-
-export fn todoFunc() pkcs11.CK_RV {//notSupported
-    std.debug.print("[CALLED]\n",.{});
-    return 0x54;
-}
-
-
-
-
-
-
-
-//pkcs11.CK_FUNCTION_LIST_PTR_PTR
-////ppFunctionList: *pkcs11.CK_FUNCTION_LIST
-
-
-
-//
-// pkcs11.CK_FUNCTION_LIST{
-// .version = version,
-// .C_Initialize = C_Initialize,
-// //.C_Initialize = &C_Initialize,
-// //.C_Finalize = 123,
-// //.C_GetInfo = &C_Initialize,
-// //.C_GetFunctionList = 123,
-// // .C_GetSlotList = todoFunc,
-// // .C_GetSlotInfo = todoFunc,
-// // .C_GetTokenInfo = todoFunc,
-// // .C_GetMechanismList = todoFunc,
-// // .C_GetMechanismInfo = todoFunc,
-// // .C_InitToken = todoFunc,
-// // .C_InitPIN = todoFunc,
-// // .C_SetPIN = todoFunc,
-// // .C_OpenSession = todoFunc,
-// // .C_CloseSession = todoFunc,
-// // .C_CloseAllSessions = todoFunc,
-// // .C_GetSessionInfo = todoFunc,
-// // .C_GetOperationState = todoFunc,
-// // .C_SetOperationState = todoFunc,
-// // .C_Login = todoFunc,
-// // .C_Logout = todoFunc,
-// // .C_CreateObject = todoFunc,
-// // .C_CopyObject = todoFunc,
-// // .C_DestroyObject = todoFunc,
-// // .C_GetObjectSize = todoFunc,
-// // .C_GetAttributeValue = todoFunc,
-// // .C_SetAttributeValue = todoFunc,
-// // .C_FindObjectsInit = todoFunc,
-// // .C_FindObjects = todoFunc,
-// // .C_FindObjectsFinal = todoFunc,
-// // .C_EncryptInit = todoFunc,
-// // .C_Encrypt = todoFunc,
-// // .C_EncryptUpdate = todoFunc,
-// // .C_EncryptFinal = todoFunc,
-// // .C_DecryptInit = todoFunc,
-// // .C_Decrypt = todoFunc,
-// // .C_DecryptUpdate = todoFunc,
-// // .C_DecryptFinal = todoFunc,
-// // .C_DigestInit = todoFunc,
-// // .C_Digest = todoFunc,
-// // .C_DigestUpdate = todoFunc,
-// // .C_DigestKey = todoFunc,
-// // .C_DigestFinal = todoFunc,
-// // .C_SignInit = todoFunc,
-// // .C_Sign = todoFunc,
-// // .C_SignUpdate = todoFunc,
-// // .C_SignFinal = todoFunc,
-// // .C_SignRecoverInit = todoFunc,
-// // .C_SignRecover = todoFunc,
-// // .C_VerifyInit = todoFunc,
-// // .C_Verify = todoFunc,
-// // .C_VerifyUpdate = todoFunc,
-// // .C_VerifyFinal = todoFunc,
-// // .C_VerifyRecoverInit = todoFunc,
-// // .C_VerifyRecover = todoFunc,
-// // .C_DigestEncryptUpdate = todoFunc,
-// // .C_DecryptDigestUpdate = todoFunc,
-// // .C_SignEncryptUpdate = todoFunc,
-// // .C_DecryptVerifyUpdate = todoFunc,
-// // .C_GenerateKey = todoFunc,
-// // .C_GenerateKeyPair = todoFunc,
-// // .C_WrapKey = todoFunc,
-// // .C_UnwrapKey = todoFunc,
-// // .C_DeriveKey = todoFunc,
-// // .C_SeedRandom = todoFunc,
-// // .C_GenerateRandom = todoFunc,
-// // .C_GetFunctionStatus = todoFunc,
-// // .C_CancelFunction = todoFunc,
-// // .C_WaitForSlotEvent = todoFunc,
-// }
