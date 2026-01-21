@@ -206,4 +206,4 @@ pub const CK_FUNCTION_LIST: type = extern struct {
 
 pub const CK_FUNCTION_LIST_PTR: type = *CK_FUNCTION_LIST;
 
-pub const CK_FUNCTION_LIST_PTR_PTR: type = ?(*CK_FUNCTION_LIST_PTR);
+pub const CK_FUNCTION_LIST_PTR_PTR: type = *CK_FUNCTION_LIST_PTR;

@@ -1,13 +1,23 @@
 const pkcs11: type = @import("pkcs11.zig");
 const std: type = @import("std");
 
-export fn C_Initialize(_: pkcs11.CK_VOID_PTR) pkcs11.CK_RV {
+const version: pkcs11.CK_VERSION = pkcs11.CK_VERSION{
+    .major = 0x02,
+    .minor = 0x28,
+};
+
+var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
+    .version = version,
+    .C_Initialize = &C_Initialize,
+};
+
+export fn C_Initialize(_: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV  {
     std.debug.print("[CALLED]: C_Initialize()\n",.{});
     //std.debug.print("[CALLED]: C_Initialize({})\n",.{pInitArgs});
     return 0;
 }
 
-export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) pkcs11.CK_RV {
+export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) callconv(.c) pkcs11.CK_RV {
     std.debug.print("[CALLED]: C_Finalize()\n",.{});
     std.debug.print("[CALLED]: C_Finalize({})\n",.{pReserved});
     //TODO
@@ -15,22 +25,14 @@ export fn C_Finalize(pReserved: pkcs11.CK_VOID_PTR) pkcs11.CK_RV {
     return 0;
 }
 
-var functionList: pkcs11.CK_FUNCTION_LIST = pkcs11.CK_FUNCTION_LIST{
-    .version = version,
-    .C_Initialize = &C_Initialize,
-};
-
-export fn C_GetFunctionList(ppFunctionList: *?*pkcs11.CK_FUNCTION_LIST) pkcs11.CK_RV {
+export fn C_GetFunctionList(ppFunctionList: pkcs11.CK_FUNCTION_LIST_PTR_PTR) callconv(.c) pkcs11.CK_RV {
     std.debug.print("[CALLED]: C_GetFunctionList(ppFunctionList={})\n",.{ppFunctionList});
     std.debug.print(" - ppFunctionList = {} \n",.{@intFromPtr(ppFunctionList)});
     std.debug.print(" - *ppFunctionList = {} \n",.{@intFromPtr(ppFunctionList.*)});
 
-    //if(ppFunctionList==null){
-    //    std.debug.print(" - ppFunctionList IS NULL\n",.{});
-    //    return 123;
-    //}
-
-    //functionList.C_Initialize = &C_Initialize;
+    if(@intFromPtr(ppFunctionList)==0){
+        return 123; // TODO Better error
+    }
 
     ppFunctionList.* = &functionList;
 
@@ -42,10 +44,7 @@ export fn todoFunc() pkcs11.CK_RV {//notSupported
     return 0x54;
 }
 
-const version: pkcs11.CK_VERSION = pkcs11.CK_VERSION{
-    .major = 0x02,
-    .minor = 0x28,
-};
+
 
 
 
