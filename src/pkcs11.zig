@@ -54,13 +54,13 @@ const CK_VERSION_PTR: type = *CK_VERSION;
 
 pub const CK_INFO: type = extern struct {
     cryptokiVersion: CK_VERSION,
-    manufacturerID: CK_UTF8CHAR[32],
+    manufacturerID: [32]CK_UTF8CHAR,
     flags: CK_FLAGS,
-    libraryDescription: CK_UTF8CHAR[32],
+    libraryDescription: [32]CK_UTF8CHAR,
     libraryVersion: CK_VERSION,
 };
 
-const CK_INFO_PTR: type = *CK_INFO;
+pub const CK_INFO_PTR: type = *CK_INFO;
 
 //CK_NOTIFICATION
 
@@ -144,7 +144,7 @@ pub const CK_FUNCTION_LIST: type = extern struct {
     version: CK_VERSION,
     C_Initialize: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_Initialize
     C_Finalize: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_Finalize
-    C_GetInfo: *const fn (*void) callconv(.c) c_ulong, //TODO CK_C_GetInfo
+    C_GetInfo: *const fn (CK_INFO_PTR) callconv(.c) c_ulong, //TODO CK_C_GetInfo
     //C_GetFunctionList: u64,//CK_C_GetFunctionList,
     // C_GetSlotList: CK_C_GetSlotList,
     // C_GetSlotInfo: CK_C_GetSlotInfo,
